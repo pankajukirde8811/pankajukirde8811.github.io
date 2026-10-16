@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Pankaj Dattatray Ukirde">
+<meta name="description" content="Pankaj Ukirde: embedded systems engineer (M.Sc. Electrical and Embedded Systems, RWU). Sensor interfacing, PCB design, IoT and automation. Ravensburg, Germany.">
+<title>Pankaj Ukirde | Embedded Systems Engineer</title>
+<style>
+:root{
+  --bg:#0c0f14; --bg2:#11161d; --card:#141a22; --line:#232c38;
+  --text:#e8ecf1; --muted:#8e9bab; --accent:#e0a458; --accent-ink:#1b1204; --accent2:#5fd0b0;
+  --trace:rgba(224,164,88,.07);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+}
+[data-theme="light"]{
+  --bg:#f6f3ec; --bg2:#efeadf; --card:#fffdf8; --line:#ddd5c4;
+  --text:#1c1a16; --muted:#6c675b; --accent:#b2641a; --accent-ink:#fff8ee; --accent2:#0f7a62;
+  --trace:rgba(178,100,26,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;transition:background .3s,color .3s;
+  background-image:linear-gradient(var(--trace) 1px,transparent 1px),linear-gradient(90deg,var(--trace) 1px,transparent 1px);background-size:44px 44px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 6vw}
+section{padding:96px 0}
+.eyebrow{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+h2{font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.2;margin-bottom:10px}
+.lead{color:var(--muted);max-width:640px;margin-bottom:40px}
+
+/* NAV */
+header{position:fixed;inset:0 0 auto 0;z-index:60;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:var(--mono);font-weight:700;color:var(--text);letter-spacing:.05em}
+.logo b{color:var(--accent)}
+nav ul{display:flex;gap:24px;list-style:none;align-items:center}
+nav a{color:var(--muted);font-size:.9rem}
+nav a:hover,nav a.on{color:var(--text);text-decoration:none}
+.tools{display:flex;gap:10px;align-items:center}
+.icon-btn{background:var(--card);border:1px solid var(--line);color:var(--text);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1.05rem;display:grid;place-items:center}
+.icon-btn:hover{border-color:var(--accent)}
+.menu{display:none}
+
+/* HERO */
+#hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:999px;color:var(--muted);margin-bottom:22px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 0 var(--accent2);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--accent)}
+.role{font-family:var(--mono);color:var(--accent2);margin:16px 0 14px;font-size:1rem}
+.intro{color:var(--muted);max-width:540px;margin-bottom:28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-weight:600;font-size:.95rem;border:1px solid var(--accent);cursor:pointer;font-family:inherit}
+.btn.fill{background:var(--accent);color:var(--accent-ink)}
+.btn.fill:hover{filter:brightness(1.1);text-decoration:none}
+.btn.line{background:transparent;color:var(--accent)}
+.btn.line:hover{background:color-mix(in srgb,var(--accent) 12%,transparent);text-decoration:none}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.9rem}
+.frame{position:relative;width:min(340px,76vw);margin:0 auto}
+.frame::before,.frame::after{content:"";position:absolute;width:64px;height:64px;border:2px solid var(--accent);z-index:2}
+.frame::before{top:-14px;left:-14px;border-right:0;border-bottom:0;border-radius:14px 0 0 0}
+.frame::after{bottom:-14px;right:-14px;border-left:0;border-top:0;border-radius:0 0 14px 0}
+.frame img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;border-radius:10px;background:var(--card)}
+.tag-chip{position:absolute;left:-18px;bottom:26px;z-index:3;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-family:var(--mono);font-size:.74rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.tag-chip b{color:var(--accent)}
+.scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--muted);text-align:center}
+.scroll::after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);margin:8px auto 0;animation:drip 1.8s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.about-grid p{color:var(--muted);margin-bottom:16px}
+.about-grid p b{color:var(--text)}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.metric strong{display:block;font-size:2.1rem;line-height:1.1;color:var(--accent);font-family:var(--mono)}
+.metric span{color:var(--muted);font-size:.85rem}
+
+/* SKILLS */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.skill-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.skill-box h3{font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills span{font-size:.84rem;padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg2);color:var(--text)}
+
+/* EXPERIENCE */
+.xp{display:grid;gap:12px}
+details.job{background:var(--card);border:1px solid var(--line);border-radius:14px;transition:border-color .2s}
+details.job[open],details.job:hover{border-color:var(--accent)}
+details.job summary{list-style:none;cursor:pointer;padding:20px 24px;display:grid;grid-template-columns:150px 1fr auto;gap:16px;align-items:center}
+details.job summary::-webkit-details-marker{display:none}
+.when{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+.what b{display:block;font-size:1.05rem}
+.what small{color:var(--muted)}
+.chev{color:var(--muted);transition:transform .25s;font-family:var(--mono)}
+details[open] .chev{transform:rotate(90deg);color:var(--accent)}
+details.job ul{padding:0 24px 22px 190px;color:var(--muted)}
+details.job li{margin-bottom:5px}
+.hire{margin-top:22px;border:1px dashed var(--accent);border-radius:14px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.hire p{max-width:640px}
+.hire b{color:var(--accent)}
+
+/* PROJECTS */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.filters button{font-family:var(--mono);font-size:.78rem;padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer}
+.filters button:hover{color:var(--text)}
+.filters button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.pcard:hover{transform:translateY(-5px);border-color:var(--accent)}
+.pcard.hide{display:none}
+.media{position:relative;aspect-ratio:16/10;background:var(--bg2);overflow:hidden;cursor:zoom-in;border:0;padding:0;width:100%;display:block}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pcard:hover .media img{transform:scale(1.05)}
+.media.contain img{object-fit:contain}
+.pcard:hover .media.contain img{transform:none}
+.media .ph{width:100%;height:100%;display:grid;place-items:center;font-size:3.4rem;cursor:default;
+  background:repeating-linear-gradient(135deg,var(--bg2) 0 14px,color-mix(in srgb,var(--line) 55%,var(--bg2)) 14px 15px)}
+.num{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:.74rem;background:var(--bg);border:1px solid var(--line);padding:3px 10px;border-radius:8px;color:var(--accent)}
+.count{position:absolute;right:12px;bottom:12px;font-family:var(--mono);font-size:.72rem;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:8px}
+.pbody{padding:22px;display:flex;flex-direction:column;flex:1}
+.cat{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--accent2);text-transform:uppercase;margin-bottom:6px}
+.pbody h3{font-size:1.1rem;line-height:1.35;margin-bottom:10px}
+.pbody p{color:var(--muted);font-size:.92rem;margin-bottom:14px;flex:1}
+.ticks{list-style:none;margin-bottom:14px}
+.ticks li{font-size:.85rem;color:var(--text);padding-left:20px;position:relative;margin-bottom:3px}
+.ticks li::before{content:"✓";position:absolute;left:0;color:var(--accent2)}
+.plink{margin-top:14px;font-family:var(--mono);font-size:.82rem;align-self:flex-start}
+.stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack span{font-family:var(--mono);font-size:.7rem;padding:3px 9px;border-radius:6px;background:var(--bg2);border:1px solid var(--line);color:var(--muted)}
+
+/* EDUCATION */
+.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.ebox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.ebox .when{display:block;margin-bottom:6px}
+.ebox h3{font-size:1.02rem}
+.ebox .org{color:var(--muted);font-size:.9rem}
+.ebox p{color:var(--muted);font-size:.9rem;margin-top:8px}
+.sub-h{font-family:var(--mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:40px 0 16px}
+
+/* CONTACT */
+#contact .eyebrow{margin-bottom:18px}
+.contact-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(28px,5vw,56px);text-align:center}
+.contact-card h2{margin-bottom:14px}
+.contact-card .lead{margin-left:auto;margin-right:auto}
+.links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.links a{display:inline-flex;gap:10px;align-items:center;padding:12px 20px;border:1px solid var(--line);border-radius:12px;color:var(--text);background:var(--bg2)}
+.links a:hover{border-color:var(--accent);text-decoration:none}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.85rem;text-align:center;font-family:var(--mono)}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;background:rgba(6,8,12,.94);z-index:100;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:24px}
+.lb.on{display:flex}
+.lb .stage{max-width:min(1000px,100%);max-height:78vh;display:flex}
+.lb .stage img,.lb .stage video{max-width:100%;max-height:78vh;border-radius:12px;background:#000}
+.lb .cap{color:#cfd6df;font-family:var(--mono);font-size:.82rem;text-align:center}
+.lb .nav{display:flex;gap:10px}
+.lb button{background:#1a2029;color:#fff;border:1px solid #2c3644;border-radius:10px;padding:8px 16px;cursor:pointer;font-family:var(--mono)}
+.lb button:hover{border-color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.dot,.scroll::after{animation:none}html{scroll-behavior:auto}}
+
+@media(max-height:900px){.scroll{display:none}}
+@media(max-width:860px){
+  .hero-grid,.about-grid{grid-template-columns:1fr}
+  .frame{order:-1;margin-bottom:10px}
+  #hero{text-align:center;padding-top:100px}
+  .cta,.meta{justify-content:center}.intro{margin-left:auto;margin-right:auto}
+  .tag-chip{left:50%;transform:translateX(-50%);bottom:-18px;white-space:nowrap}
+  .menu{display:grid}
+  nav ul{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg2);padding:18px 6vw;gap:14px;border-bottom:1px solid var(--line)}
+  nav ul.open{display:flex}
+  details.job summary{grid-template-columns:1fr auto}
+  .when{grid-column:1/-1}
+  details.job ul{padding:0 24px 22px 40px}
+  .projects{grid-template-columns:1fr}
+  section{padding:72px 0}
+  .scroll{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#hero">&lt;<b>PU</b>/&gt;</a>
+    <nav>
+      <ul id="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="theme" aria-label="Toggle light and dark theme" title="Toggle theme">☾</button>
+      <button class="icon-btn menu" id="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status"><span class="dot"></span> Available for Werkstudent / Internship · Ravensburg, DE</div>
+      <h1>I build hardware that <em>senses</em>, decides and acts.</h1>
+      <div class="role">Pankaj Ukirde · Embedded Systems Engineer</div>
+      <p class="intro">M.Sc. student in Electrical and Embedded Systems at Hochschule Ravensburg-Weingarten (RWU). From sensor interfacing and PCB design to firmware, HMIs and IoT dashboards, I take ideas from schematic to working prototype.</p>
+      <div class="cta">
+        <a class="btn fill" href="#projects">View projects →</a>
+        <a class="btn line" href="#contact">Contact me</a>
+        <a class="btn line" href="Pankaj_Ukirde_CV.pdf" download>⬇ Download CV</a>
+      </div>
+      <div class="meta">
+        <span>🎓 M.Sc. Electrical &amp; Embedded Systems</span>
+        <span>🌍 Open to relocation</span>
+      </div>
+    </div>
+    <div class="frame">
+      <img src="Photo.jpeg" alt="Portrait of Pankaj Ukirde">
+      <div class="tag-chip"><b>STM32</b> · <b>ESP32</b> · <b>Arduino</b> · <b>RPi</b></div>
+    </div>
+  </div>
+  <div class="scroll">SCROLL</div>
+</section>
+
+<section id="about" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">01 · About</div>
+    <h2>Instrumentation roots, embedded focus</h2>
+    <p class="lead">Hands-on with the whole chain: sensor, board, firmware, enclosure and screen.</p>
+    <div class="about-grid">
+      <div>
+        <p>I am an Instrumentation and Embedded Systems engineer pursuing an <b>M.Sc. in Electrical and Embedded Systems</b> at <b>Hochschule Ravensburg-Weingarten</b> (Ravensburg-Weingarten University of Applied Sciences, RWU).</p>
+        <p>My path runs from a Diploma and B.E. in Instrumentation Technology in Mumbai to industry work as a Design Engineer, where I built an HMI for a hydrogen-based solar induction system at IIT Bombay, debugged RTD temperature controllers, laid out PCBs and prepared FreeCAD flat patterns.</p>
+        <p>I also like teaching: I have written workshop content and taught school students to code robots with Blockly and MicroPython.</p>
+        <p>I am looking for a <b>Werkstudent or internship</b> in embedded design, sensor interfacing, automation, PCB design or hardware development in Germany.</p>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>9</strong><span>Featured projects</span></div>
+        <div class="metric"><strong>4</strong><span>Industry &amp; intern roles</span></div>
+        <div class="metric"><strong>1st</strong><span>Prize, Robothon 2023</span></div>
+        <div class="metric"><strong>EN·DE</strong><span>English pro · German A2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">02 · Skills</div>
+    <h2>Toolbox</h2>
+    <p class="lead">What I reach for when building and debugging embedded systems.</p>
+    <div class="skill-grid">
+      <div class="skill-box"><h3>Microcontrollers</h3><div class="pills"><span>STM32</span><span>ESP32</span><span>Arduino</span><span>Raspberry Pi</span><span>8051</span><span>FPGA</span></div></div>
+      <div class="skill-box"><h3>Programming</h3><div class="pills"><span>Embedded C / C++</span><span>MicroPython</span><span>Blockly</span><span>Git</span><span>Linux</span></div></div>
+      <div class="skill-box"><h3>Hardware &amp; PCB</h3><div class="pills"><span>PCB design</span><span>PCB testing</span><span>Sensor interfacing</span><span>Load cell calibration</span><span>RTD-based control</span><span>HMI programming</span></div></div>
+      <div class="skill-box"><h3>CAD &amp; Fabrication</h3><div class="pills"><span>FreeCAD</span><span>AutoCAD</span><span>Tinkercad</span><span>3D printing</span><span>Laser cutting</span></div></div>
+      <div class="skill-box"><h3>Languages</h3><div class="pills"><span>English · professional</span><span>German · A2</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">03 · Experience</div>
+    <h2>Where I have worked</h2>
+    <p class="lead">Click a role to see what I did there.</p>
+    <div class="xp">
+      <details class="job" open>
+        <summary><span class="when">APR 2024 – AUG 2025</span><span class="what"><b>Design Engineer</b><small>Ideation Instruments · Navi Mumbai, India</small></span><span class="chev">▸</span></summary>
+        <ul>
+          <li>Developed the HMI for the IIT Bombay hydrogen-based solar induction system.</li>
+          <li>Debugged and tuned an RTD-based temperature controller.</li>
+          <li>Created FreeCAD flat patterns and PCB layouts.</li>
+        </ul>
+      </details>
+      <details class="job">
+        <summary><span class="when">SEP 2023 – MAR 2024</span><span class="what"><b>Product Engineer (Intern)</b><small>Ideation Instruments · Navi Mumbai, India</small></span><span class="chev">▸</span></summary>
+        <ul>
+          <li>PCB testing plus reliability and quality testing of products.</li>
+          <li>Worked on STM32 and ESP based hardware.</li>
+        </ul>
+      </details>
+      <details class="job">
+        <summary><span class="when">AUG 2023 – JAN 2024</span><span class="what"><b>IoT Developer (Intern)</b><small>Skill Bahn LLP · Thane, India</small></span><span class="chev">▸</span></summary>
+        <ul><li>Developed IoT solutions and device connectivity.</li></ul>
+      </details>
+      <details class="job">
+        <summary><span class="when">JAN 2022 – DEC 2023</span><span class="what"><b>Embedded Systems Developer (Part-time)</b><small>Maximus Robotics-Pro · Thane, India</small></span><span class="chev">▸</span></summary>
+        <ul>
+          <li>Wrote Blockly-based drivers for robots.</li>
+          <li>Implemented sensor data acquisition.</li>
+        </ul>
+      </details>
+      <details class="job">
+        <summary><span class="when">DEC 2021 – MAY 2024</span><span class="what"><b>Lab Coordinator</b><small>Tinkerers Lab, ISA-VESIT · Mumbai, India</small></span><span class="chev">▸</span></summary>
+        <ul><li>Ran the maker lab: 3D printers, laser cutter and robotic arm.</li></ul>
+      </details>
+      <details class="job">
+        <summary><span class="when">MAR 2019 – SEP 2019</span><span class="what"><b>In-Plant Trainee</b><small>Air India Engineering Services · Mumbai, India</small></span><span class="chev">▸</span></summary>
+        <ul><li>Cabin and in-flight entertainment system maintenance checks.</li></ul>
+      </details>
+    </div>
+    <div class="hire">
+      <p><b>Hiring for an embedded or hardware role?</b> I am looking for a Werkstudent position or internship in Germany and can start on a flexible schedule.</p>
+      <a class="btn fill" href="#contact">Let's talk</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">04 · Projects</div>
+    <h2>Things I have built</h2>
+    <p class="lead">Click a photo to open the gallery.</p>
+    <div class="filters" id="filters"></div>
+    <div class="projects" id="projects-grid"></div>
+  </div>
+</section>
+
+<section id="education" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">05 · Education</div>
+    <h2>Studies &amp; recognition</h2>
+    <p class="lead">Academic path, awards and volunteering.</p>
+    <div class="edu">
+      <div class="ebox"><span class="when">SEP 2025 – PRESENT</span><h3>M.Sc. Electrical and Embedded Systems (EMM)</h3><div class="org">Hochschule Ravensburg-Weingarten (RWU), Ravensburg-Weingarten University of Applied Sciences, Germany</div></div>
+      <div class="ebox"><span class="when">OCT 2021 – JUN 2024</span><h3>B.E. Instrumentation Technology</h3><div class="org">VESIT, Mumbai, India</div><p>FPGA prototyping; workshops on PCB design, 8051 and 3D printing.</p></div>
+      <div class="ebox"><span class="when">2019 – 2021</span><h3>Diploma in Instrumentation Technology</h3><div class="org">VES Polytechnic, Mumbai, India</div><p>First Class.</p></div>
+    </div>
+    <div class="sub-h">Achievements</div>
+    <div class="edu">
+      <div class="ebox"><span class="when">JAN 2023</span><h3>🏆 1st Prize, Robothon</h3><div class="org">B.K. Birla College</div><p>Won with an IoT home-automation project.</p></div>
+      <div class="ebox"><span class="when">2023</span><h3>🚁 S.P.I.T. Innovation Cup-23</h3><div class="org">Round 2</div><p>Surveillance 2-DOF helicopter with RC car.</p></div>
+      <div class="ebox"><span class="when">VOLUNTEERING</span><h3>🤝 With Them For Them / Adarsh Foundation</h3><p>30 hours of volunteer work.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">06 · Contact</div>
+    <div class="contact-card">
+      <h2>Let's build something together</h2>
+      <p class="lead">I am open to Werkstudent and internship positions in embedded systems, sensor interfacing, automation, PCB design and hardware across Germany.</p>
+      <div class="links">
+        <a href="mailto:pankajukirde286@gmail.com">✉ pankajukirde286@gmail.com</a>
+        <a href="tel:+4915511278356">📞 +49 155 1127 8356</a>
+        <a href="https://www.linkedin.com/in/pankaj-dattatray-ukirde-/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a href="Pankaj_Ukirde_CV.pdf" download>⬇ CV (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Pankaj Dattatray Ukirde · Ravensburg, Germany</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Project gallery">
+  <div class="stage" id="stage"></div>
+  <div class="cap" id="cap"></div>
+  <div class="nav"><button id="prev">← Prev</button><button id="close">Close ✕</button><button id="next">Next →</button></div>
+</div>
+
+<script>
+const PROJECTS=[
+ {t:"CardioSense AI: Heart-Risk Prediction Web App",c:"AI",i:"❤️",l:"https://github.com/pankajukirde8811/CardioSense-AI",
+  d:"Final-year project: a Flask web app that predicts cardiovascular risk from health details typed in by hand or read from an uploaded blood test report (PDF or photo). It returns a risk percentage, risk level and the main risk factors, with a downloadable PDF report and a private history for each user.",
+  k:["Random Forest model trained on 68,581 cleaned patient records, 73.3% accuracy","OCR reads PDF and photo lab reports; the user confirms values before prediction","Secure login, per-user history, PDF report and installable PWA"],
+  s:["Python","Flask","scikit-learn","Tesseract OCR","SQLite","ReportLab"],
+  m:[{src:"cardiosense-1.jpg",alt:"CardioSense AI result page with risk gauge (sample values)"},{src:"cardiosense-2.jpg",alt:"CardioSense AI health details form with blood report upload"},{src:"cardiosense-3.jpg",alt:"CardioSense AI login page"},{src:"cardiosense-4.jpg",alt:"CardioSense AI history of previous checks"}]},
+ {t:"PrecisionForce: Load Cell Force Measurement",c:"Sensing",i:"⚖️",
+  d:"Interfaced a load cell with a microcontroller for accurate force measurement and analysis. The sensor output is calibrated and the firmware processes and analyses the data. Aimed at an affordable, accessible solution for material testing, force measurement and product design.",
+  k:["Calibrated load cell output","Processing and analysis firmware","Extendable to logging and wireless monitoring"],
+  s:["Load Cell","Calibration","Microcontroller","Data Analysis"],m:[]},
+ {t:"Sheet-Metal Robot Car: FreeCAD Flat-Pattern Design",c:"Design",i:"🚗",
+  d:"Designed the car's aluminium sheet-metal chassis and body in FreeCAD and produced the flat-pattern files for cutting and bending. Then took the project through to a working robot: mounted the ultrasonic distance sensors and drive motors, did the full sensor and motor wiring, and wrote the control code.",
+  k:["CAD to flat pattern to finished chassis","Complete sensor and motor wiring","Control code written and tested"],
+  s:["FreeCAD","Flat Patterns","Sheet Metal","Ultrasonic Sensors","Wiring","Embedded Code"],
+  m:[{src:"car-2.jpg",alt:"Sheet-metal robot car, front-left view"},{src:"car-3.jpg",alt:"Robot car front view with ultrasonic sensors"},{src:"car-4.jpg",alt:"Robot car, front-right view"},{src:"car-1.jpg",alt:"Robot car top view"}]},
+ {t:"Otto DIY Robot: Coding Workshop for School Students",fit:"contain",c:"Education",i:"🤖",
+  d:"Otto is an open-source, 3D-printed biped robot that walks, dances and senses obstacles with ultrasonic eyes. I helped build the workshop content and taught school students to program it with Blockly, a block-based tool that generates MicroPython.",
+  k:["Workshop content created and delivered","Students learned loops, conditions and sensor logic","Block coding turned into a moving robot"],
+  s:["Otto DIY","Blockly","MicroPython","Teaching","3D Printing"],
+  m:[{src:"otto-1.jpg",alt:"Otto DIY 3D-printed biped robot"},{video:"otto-video.mp4",poster:"otto-1.jpg",alt:"Otto robot demo video"}]},
+ {t:"IoT-enabled Smart Home Demo Kit",fit:"contain",c:"IoT",i:"🏠",
+  d:"A home-automation demo kit that controls appliances remotely via IR remote and Wi-Fi through the Blynk app. Temperature and humidity sensors feed a live Blynk dashboard, showcasing smart-home convenience and energy efficiency.",
+  k:["IR remote and Wi-Fi appliance control","Live temperature and humidity dashboard","1st prize at Robothon 2023"],
+  s:["Blynk","Wi-Fi","IR Remote","Temp / Humidity"],
+  m:[{src:"smarthome-2.jpg",alt:"Smart home demo kit with lamp, fan and controller"},{src:"smarthome-1.jpg",alt:"Receiving the 1st prize at Robothon, January 2023"}]},
+ {t:"Surveillance 2-DOF Helicopter with RC Car",fit:"contain",c:"Embedded",i:"🚁",
+  d:"A surveillance concept combining a two-degree-of-freedom helicopter with an RC car platform, presented in Round 2 of the S.P.I.T. Innovation Cup-23. The rig is driven by a coreless motor through a motor driver, with an encoder for position feedback and ESP32 boards for control.",
+  k:["Two-axis motion with encoder feedback","Motor driver and ESP32 control","Round 2, S.P.I.T. Innovation Cup-23"],
+  s:["2-DOF","Coreless Motor","Encoder","ESP32"],
+  m:[{src:"helicopter-1.jpg",alt:"2-DOF helicopter rig with coreless motor, motor driver, encoder and ESP32"}]},
+ {t:"Soil Moisture Sensor with Arduino",c:"Sensing",i:"🌱",
+  d:"Measured soil moisture by interfacing a soil probe with an Arduino Uno, converting the sensed soil resistance into a moisture level. An alarm warns when moisture is too low or too high, helping farmers and gardeners improve irrigation and plant health.",
+  k:["Resistance-to-moisture conversion","Low and high level alarm"],
+  s:["Arduino Uno","Soil Probe","Alarm Logic"],m:[]},
+ {t:"MicroPython Algorithm-Based Block Programming",c:"Embedded",i:"🧩",
+  d:"Developed code for sensors and motors using Blockly's drag-and-drop blocks, backed by MicroPython algorithms for resource-limited boards. Tested on Arduino and Raspberry Pi to make embedded coding accessible to non-experts.",
+  k:["Sensor and motor code from blocks","Tested on Arduino and Raspberry Pi","Useful for robotics, home automation and IoT"],
+  s:["MicroPython","Blockly","Arduino","Raspberry Pi"],m:[]},
+ {t:"Decoding the Working Principle of Absolute Encoders",c:"Sensing",i:"🎛️",
+  d:"A study of absolute encoder construction, components and communication protocols, plus a practical demo: interfacing an encoder with a microcontroller to decode and display the exact shaft position.",
+  k:["Unique code per shaft position","Live position decoded on a microcontroller"],
+  s:["Absolute Encoder","Protocols","Microcontroller","Motion Control"],m:[]}
+];
+
+const grid=document.getElementById('projects-grid'),filters=document.getElementById('filters');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+PROJECTS.forEach((p,n)=>{
+  const el=document.createElement('article');el.className='pcard';el.dataset.cat=p.c;
+  const first=p.m[0];
+  const cover=first?`<button class="media${p.fit?' contain':''}" data-p="${n}" aria-label="Open gallery for ${esc(p.t)}"><img src="${first.src||first.poster}" alt="${esc(first.alt)}" loading="lazy"><span class="num">${String(n+1).padStart(2,'0')}</span>${p.m.length>1?`<span class="count">${p.m.length} items</span>`:''}</button>`
+    :`<div class="media"><div class="ph" aria-hidden="true">${p.i}</div><span class="num">${String(n+1).padStart(2,'0')}</span></div>`;
+  el.innerHTML=`${cover}<div class="pbody"><div class="cat">${p.c}</div><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p><ul class="ticks">${p.k.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="stack">${p.s.map(x=>`<span>${esc(x)}</span>`).join('')}</div>${p.l?`<a class="plink" href="${p.l}" target="_blank" rel="noopener">View on GitHub →</a>`:''}</div>`;
+  grid.appendChild(el);
+});
+['All',...new Set(PROJECTS.map(p=>p.c))].forEach((c,i)=>{
+  const b=document.createElement('button');b.textContent=c;if(!i)b.classList.add('on');
+  b.addEventListener('click',()=>{filters.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    grid.querySelectorAll('.pcard').forEach(card=>card.classList.toggle('hide',c!=='All'&&card.dataset.cat!==c))});
+  filters.appendChild(b);
+});
+
+/* lightbox */
+const lb=document.getElementById('lb'),stage=document.getElementById('stage'),cap=document.getElementById('cap');
+let cur=0,items=[];
+function show(){
+  const it=items[cur];stage.innerHTML='';
+  let el;
+  if(it.video){el=document.createElement('video');el.src=it.video;el.poster=it.poster||'';el.controls=true;el.autoplay=true;el.playsInline=true}
+  else{el=document.createElement('img');el.src=it.src;el.alt=it.alt}
+  stage.appendChild(el);cap.textContent=`${it.alt}  ·  ${cur+1} / ${items.length}`;
+  document.getElementById('prev').style.visibility=document.getElementById('next').style.visibility=items.length>1?'visible':'hidden';
+}
+function closeLb(){lb.classList.remove('on');stage.innerHTML=''}
+grid.addEventListener('click',e=>{const b=e.target.closest('.media[data-p]');if(!b)return;items=PROJECTS[+b.dataset.p].m;cur=0;lb.classList.add('on');show()});
+document.getElementById('prev').onclick=()=>{cur=(cur-1+items.length)%items.length;show()};
+document.getElementById('next').onclick=()=>{cur=(cur+1)%items.length;show()};
+document.getElementById('close').onclick=closeLb;
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;
+  if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')document.getElementById('prev').click();if(e.key==='ArrowRight')document.getElementById('next').click()});
+
+/* theme */
+const root=document.documentElement,tbtn=document.getElementById('theme');
+function setTheme(t){root.dataset.theme=t;tbtn.textContent=t==='dark'?'☾':'☀'}
+let saved=null;try{saved=localStorage.getItem('theme')}catch(e){}
+setTheme(saved||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
+tbtn.onclick=()=>{const t=root.dataset.theme==='dark'?'light':'dark';setTheme(t);try{localStorage.setItem('theme',t)}catch(e){}};
+
+/* menu + reveal + active link */
+const menu=document.getElementById('menu');
+document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const links=[...menu.querySelectorAll('a')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
