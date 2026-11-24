@@ -248,7 +248,7 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-s
         <p>I am looking for a <b>Werkstudent or internship</b> in embedded design, sensor interfacing, automation, PCB design or hardware development in Germany.</p>
       </div>
       <div class="metrics">
-        <div class="metric"><strong>9</strong><span>Featured projects</span></div>
+        <div class="metric"><strong>10</strong><span>Featured projects</span></div>
         <div class="metric"><strong>4</strong><span>Industry &amp; intern roles</span></div>
         <div class="metric"><strong>1st</strong><span>Prize, Robothon 2023</span></div>
         <div class="metric"><strong>EN·DE</strong><span>English pro · German A2</span></div>
@@ -381,6 +381,11 @@ const PROJECTS=[
   k:["Random Forest model trained on 68,581 cleaned patient records, 73.3% accuracy","OCR reads PDF and photo lab reports; the user confirms values before prediction","Secure login, per-user history, PDF report and installable PWA"],
   s:["Python","Flask","scikit-learn","Tesseract OCR","SQLite","ReportLab"],
   m:[{src:"cardiosense-1.jpg",alt:"CardioSense AI result page with risk gauge (sample values)"},{src:"cardiosense-2.jpg",alt:"CardioSense AI health details form with blood report upload"},{src:"cardiosense-3.jpg",alt:"CardioSense AI login page"},{src:"cardiosense-4.jpg",alt:"CardioSense AI history of previous checks"}]},
+ {t:"Augmented Reality Poster with ArUco Markers",c:"Computer Vision",i:"🖼️",l:"https://github.com/pankajukirde8811/CV_Task_1",
+  d:"Computer Vision course project at RWU: a virtual poster is placed on a lecture-room wall in photos taken from different angles. An ArUco marker on the wall gives four corner points, a homography maps the wall plane into each photo, and the poster is warped onto it with correct perspective. The result is then checked with vanishing points: real wall seams must point to the same vanishing points as the poster edges.",
+  k:["Marker detection and homography with OpenCV (detectMarkers, getPerspectiveTransform)","Vanishing-point evaluation: 8 of 10 images within 2°, 2 borderline (2–5°)","Rectified frontal wall view, automatic upright rotation and a step-by-step Jupyter notebook"],
+  s:["Python","OpenCV","ArUco","Homography","NumPy","Jupyter"],
+  m:[{src:"cv-ar-1.jpg",alt:"Virtual poster placed on the lecture-room wall using an ArUco marker"},{src:"cv-ar-2.jpg",alt:"Poster on the wall seen at a steep angle, close to the camera"},{src:"cv-ar-3.jpg",alt:"Evaluation: poster edges (red) and real wall lines (green) pointing to the same vanishing points"},{src:"cv-ar-4.jpg",alt:"Rectified frontal view of the wall with reference grid and poster outline"}]},
  {t:"PrecisionForce: Load Cell Force Measurement",c:"Sensing",i:"⚖️",
   d:"Interfaced a load cell with a microcontroller for accurate force measurement and analysis. The sensor output is calibrated and the firmware processes and analyses the data. Aimed at an affordable, accessible solution for material testing, force measurement and product design.",
   k:["Calibrated load cell output","Processing and analysis firmware","Extendable to logging and wireless monitoring"],
